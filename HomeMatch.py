@@ -1,9 +1,9 @@
 """HomeMatch: Real estate listing generation, storage, and matching."""
-
 import os
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
+
 
 os.environ["OPENAI_API_BASE"] = "https://openai.vocareum.com/v1"
 os.environ["OPENAI_API_KEY"] = "voc-73934113126677372266267671b469979c3.45097448"
