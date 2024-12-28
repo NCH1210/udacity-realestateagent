@@ -1,12 +1,10 @@
 """HomeMatch: Real estate listing generation, storage, and matching."""
 
 import os
-from typing import List, Dict, Optional
 from langchain.chat_models import ChatOpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 
-# Set OpenAI API configurations
 os.environ["OPENAI_API_BASE"] = "https://openai.vocareum.com/v1"
 os.environ["OPENAI_API_KEY"] = "voc-73934113126677372266267671b469979c3.45097448"
 
@@ -14,147 +12,97 @@ os.environ["OPENAI_API_KEY"] = "voc-73934113126677372266267671b469979c3.45097448
 class HomeMatch:
     """Handles real estate listing generation, storage, and matching."""
 
-    def __init__(self) -> None:
-        """Initialize LLM, embeddings, and vector store."""
+    def __init__(self):
         self.llm = ChatOpenAI(temperature=0.7, model_name="gpt-3.5-turbo",
                               openai_api_base=os.environ["OPENAI_API_BASE"],
                               openai_api_key=os.environ["OPENAI_API_KEY"])
         self.embeddings = OpenAIEmbeddings(openai_api_base=os.environ["OPENAI_API_BASE"],
                                            openai_api_key=os.environ["OPENAI_API_KEY"])
-        self.vector_store: Optional[FAISS] = None
+        self.vector_store = None
 
-    def generate_listings(self, num_listings: int = 3) -> List[Dict]:
+    def generate_listings(self, num_listings=10):
         """Generate real estate listings using LLM."""
         try:
-            messages = [
-                {"role": "user", "content": self._generate_listing_prompt()}]
-            return [self._parse_listing(self.llm.predict_messages(messages).content)
-                    for _ in range(min(num_listings, 3))]
+            prompt = self._generate_listing_prompt()
+            return [self._parse_listing(self.llm.predict(prompt).strip())
+                    for _ in range(num_listings)]
         except ValueError as err:
-            print(f"Warning: Using default listings. Error: {str(err)}")
-            return self._parse_listings(self._get_default_listings())
+            print(f"Error generating listings: {err}")
+            return []
 
-    def _generate_listing_prompt(self) -> str:
+    def _generate_listing_prompt(self):
         """Get prompt for generating a real estate listing."""
-        return """Generate a detailed real estate listing with the format:
-               Neighborhood: [name]
-               Price: [price in USD]
-               Bedrooms: [number] 
-               Bathrooms: [number]
-               House Size: [size in sqft]  
-               Description: [property description]
-               Neighborhood Description: [neighborhood description]"""
+        return """Generate a detailed real estate listing with:
+               Neighborhood: [name], Price: [USD], Bedrooms: [number], 
+               Bathrooms: [number], House Size: [sqft],
+               Description: [property description],
+               Neighborhood Description: [description]"""
 
-    def _get_default_listings(self) -> List[str]:
-        """Return default listings if API fails."""
-        return ["""Neighborhood: Maple Valley
-       Price: $650,000
-       Bedrooms: 3
-       Bathrooms: 2.5
-       House Size: 2,200 sqft
-       Description: Modern home with open-concept kitchen.
-       Neighborhood Description: Family-friendly area with schools."""]
-
-    def _parse_listing(self, raw_listing: str) -> Dict:
+    def _parse_listing(self, raw_listing):
         """Parse raw listing text into structured format."""
-        lines = raw_listing.strip().split('\n')
         parsed = {}
-        current_key = None
-        current_value = []
-        for line in lines:
-            if ':' in line and not current_value:
+        for line in raw_listing.split('\n'):
+            if ':' in line:
                 key, value = line.split(':', 1)
-                key, value = key.strip(), value.strip()
-                if key in ['Description', 'Neighborhood Description']:
-                    current_key = key
-                    current_value.append(value)
-                else:
-                    parsed[key] = value
-            elif current_key:
-                current_value.append(line.strip())
-            if current_key and (not line.strip() or line == lines[-1]):
-                parsed[current_key] = ' '.join(current_value).strip()
-                current_key = None
-                current_value = []
+                parsed[key.strip()] = value.strip()
         return parsed
 
-    def _parse_listings(self, raw_listings: List[str]) -> List[Dict]:
-        """Parse multiple raw listings."""
-        return [self._parse_listing(listing) for listing in raw_listings]
-
-    def store_listings(self, listings: List[Dict]) -> None:
+    def store_listings(self, listings):
         """Store listings in vector store."""
-        texts = [
-            f"{l.get('Description', '')} {
-                l.get('Neighborhood Description', '')}"
-            for l in listings
-        ]
-        metadatas = [
-            {k: v for k, v in l.items()
-             if k not in ['Description', 'Neighborhood Description']}
-            for l in listings
-        ]
+        texts = [f"{l['Description']} {
+            l['Neighborhood Description']}" for l in listings]
+        metadatas = [{k: v for k, v in l.items() if k != 'Description'}
+                     for l in listings]
         self.vector_store = FAISS.from_texts(
             texts, self.embeddings, metadatas=metadatas)
 
-    def process_buyer_preferences(self, user_preferences: List[str]) -> str:
+    def process_buyer_preferences(self, preferences):
         """Process buyer preferences into a search query."""
-        prompt = f"""Given these preferences: {' '.join(user_preferences)}
-        Create a summary of the ideal home for this buyer."""
-        return self.llm.predict_messages([{"role": "user", "content": prompt}]).content
+        prompt = f"Summarize the ideal home given: {' '.join(preferences)}"
+        return self.llm.predict(prompt).strip()
 
-    def find_matches(self, search_query: str, num_results: int = 3) -> List[Dict]:
+    def find_matches(self, query, k=3):
         """Find matching listings based on preferences."""
         if not self.vector_store:
             return []
-        results = self.vector_store.similarity_search(
-            search_query, k=num_results)
-        return [{**doc.metadata, 'Description': doc.page_content} for doc in results]
+        docs = self.vector_store.similarity_search(query, k=k)
+        return [{**doc.metadata, 'Description': doc.page_content} for doc in docs]
 
-    def personalize_description(self, listing: Dict, user_preferences: List[str]) -> str:
+    def personalize_description(self, listing, preferences):
         """Personalize listing description for buyer."""
-        prompt = f"""Given preferences: {' '.join(user_preferences)}
-        And listing: {listing}
-        Rewrite to highlight relevant features."""
-        return self.llm.predict_messages([{"role": "user", "content": prompt}]).content
+        prompt = f"""Personalize this listing for the buyer:
+        Listing: {listing}
+        Buyer Preferences: {' '.join(preferences)}"""
+        return self.llm.predict(prompt).strip()
 
 
-def run_homematch(buyer_preferences: List[str], num_listings: int = 3) -> List[Dict]:
+def run_homematch(buyer_preferences, num_listings=10):
     """Run the HomeMatch application workflow."""
-    try:
-        home_match = HomeMatch()
-        print("Generating listings...")
-        listings = home_match.generate_listings(num_listings)
-        print("Storing listings...")
-        home_match.store_listings(listings)
-        try:
-            print("Processing preferences...")
-            search_query = home_match.process_buyer_preferences(
-                buyer_preferences)
-        except ValueError as err:
-            print(f"Using simplified matching: {err}")
-            search_query = " ".join(buyer_preferences)
-        print("Finding matches...")
-        found_matches = home_match.find_matches(
-            search_query, num_results=min(3, num_listings))
-        print("Personalizing descriptions...")
-        return [home_match.personalize_description(match, buyer_preferences)
-                for match in found_matches]
-    except KeyError as err:
-        print(f"Error running HomeMatch: {str(err)}")
-        return []
+    homematch = HomeMatch()
+    print("Generating listings...")
+    listings = homematch.generate_listings(num_listings)
+    print(f"Generated {len(listings)} listings. Saving to listings.txt")
+    with open('listings.txt', 'w', encoding='utf-8') as f:
+        for listing in listings:
+            f.write(str(listing) + '\n\n')
+    print("Storing listings in vector DB...")
+    homematch.store_listings(listings)
+    print("Finding personalized matches...")
+    query = homematch.process_buyer_preferences(buyer_preferences)
+    matches = homematch.find_matches(query)
+    print("Generating personalized descriptions...")
+    return [homematch.personalize_description(m, buyer_preferences) for m in matches]
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     sample_preferences = [
-        "Three-bedroom house with spacious kitchen",
+        "Spacious 3BR house with nice kitchen",
         "Quiet neighborhood with good schools",
-        "Backyard and two-car garage",
-        "Close to public transportation",
+        "Backyard, garage, energy-efficient",
+        "Near public transit and highway",
         "Suburban feel with urban amenities"
     ]
-    final_matches = run_homematch(sample_preferences)
-    for i, current_match in enumerate(final_matches, 1):
-        print(f"\nMatch {i}:")
-        print(current_match)
-        print("-" * 80)
+    personalized_matches = run_homematch(sample_preferences)
+    print(f"\nGenerated {len(personalized_matches)} personalized matches:")
+    for i, match in enumerate(personalized_matches, 1):
+        print(f"\nMatch {i}:\n{match}\n{'-'*50}")
