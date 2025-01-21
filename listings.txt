@@ -1,0 +1,32 @@
+# Real Estate Listings
+
+1. SINGLE FAMILY HOME - HARBOR VIEW ESTATES
+   * ID: L1
+   * Price: $1,250,000
+   * Square Feet: 3,800
+   * Bedrooms: 5
+   * Bathrooms: 4.5
+   * Year Built: 2018
+   * Location: Harbor View Estates
+   * Property Type: Single Family Home
+   * Lot Size: 0.5 acres
+   * Garage: 3-car attached
+   * Features: Gourmet kitchen with island, Smart home technology, Wine cellar, Home theater
+   * School District: Harbor View District
+   * Amenities: Private dock, Beach access, Gated community, Tennis courts
+
+2. LOFT CONDO - ARTS DISTRICT
+   * ID: L2
+   * Price: $575,000
+   * Square Feet: 1,200
+   * Bedrooms: 2
+   * Bathrooms: 2
+   * Year Built: 2015
+   * Location: Arts District
+   * Property Type: Loft Condo
+   * Lot Size: N/A
+   * Garage: 2 assigned parking spaces
+   * Features: Floor-to-ceiling windows, Exposed brick walls, Custom lighting, High ceilings
+   * School District: Central District
+   * Amenities: Rooftop terrace, 24/7 security, Fitness center, Coffee shop downstairs
+
