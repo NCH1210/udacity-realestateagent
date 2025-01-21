@@ -2,50 +2,67 @@
 
 # HomeMatch
 
-HomeMatch is an AI-powered real estate application that generates personalized property listings based on buyer preferences. It uses large language models (LLMs) to create realistic listings, stores them in a vector database, and retrieves semantically relevant matches tailored to each buyer.
+HomeMatch is an AI-powered real estate application that generates personalized property listings and matches them to buyer preferences. The system creates detailed, realistic property descriptions and enhances them based on specific buyer requirements while maintaining factual accuracy.
 
 ## Features
 
--   Generates diverse property listings with LLMs
--   Stores listings in a vector database for efficient similarity search
--   Matches listings to buyers based on their unique preferences
--   Personalizes listing descriptions to highlight relevant features
+-   Generates diverse and realistic property listings
+-   Personalizes property descriptions based on buyer preferences
+-   Matches listings to buyers using a sophisticated scoring system
+-   Maintains factual accuracy while highlighting relevant features
+-   Exports formatted listings to easily readable text files
 
 ## Setup
 
 1. Clone the repo
 2. Install dependencies:
     ```
-    # Existing Repository Requirements
-    langchain=0.0.305
-    openai=0.28.1
-    pydantic>=1.10.12
-    pytest>=7.4.0
-    sentence-transformers>=2.2.0
-    transformers>=4.31.0
-    chromadb==0.4.12
-    jupyter==1.0.0
-    tiktoken==0.4.0
+    python==3.7+
     ```
-3. Set your OpenAI API key in the `OPENAI_API_KEY` environment variable
+3. The system uses standard Python libraries only - no external dependencies required
 4. Run the application:
     ```
-    python homematch.py
+    python home_match.py
     ```
 
 ## Usage
 
-1. Enter buyer preferences as a list of strings in `sample_preferences`
-2. Adjust `num_listings` to change the number of listings generated (default 10)
-3. Run the script to generate personalized matches
-4. View the generated listings in `listings.txt`
+1. Specify buyer preferences in the preference dictionary:
+    ```python
+    preferences = {
+        "max_price": 800000,
+        "min_sqft": 2000,
+        "min_bedrooms": 3,
+        "family_size": 4,
+        "lifestyle": "active",
+        "commute_preference": "public_transit",
+        "preferred_location": "Riverside"
+    }
+    ```
+2. Run the script to generate matches and enhance descriptions
+3. View the complete property listings in `listings.txt`
+4. Review personalized matches in the console output
+
+## Components
+
+-   `home_match.py`: Main application code
+-   `listings.txt`: Generated property listings
+-   Property types include:
+    -   Luxury waterfront estates
+    -   Modern downtown lofts
+    -   Suburban family homes
+    -   Historic properties
+    -   Mountain retreats
+    -   Starter homes
+    -   Waterfront cottages
+    -   Eco-friendly homes
+    -   Urban micro-apartments
+    -   Golf course villas
 
 ## Requirements
 
 -   Python 3.7+
--   OpenAI API key
--   langchain
--   faiss-cpu
+-   No external dependencies required
 
 ## License
 
