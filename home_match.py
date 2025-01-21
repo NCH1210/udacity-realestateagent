@@ -1,5 +1,5 @@
 """
-Real estate listing management system 
+Real estate listing management system
 
 """
 
