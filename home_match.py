@@ -1,5 +1,5 @@
 """
-Real estate listing management system
+Real estate listing management system 
 
 """
 
@@ -88,7 +88,215 @@ def create_base_listings() -> List[Property]:
                 ]
             )
         ),
-        # Add remaining properties here with the same structure...
+        Property(
+            id="L3",
+            price=685000,
+            sqft=2600,
+            bedrooms=4,
+            bathrooms=3,
+            year_built=2010,
+            location="Willow Creek Estates",
+            property_type="Single Family Home",
+            facts=PropertyFacts(
+                lot_size="0.3 acres",
+                garage="2-car attached",
+                features=[
+                    "Open floor plan",
+                    "Granite countertops",
+                    "Stainless steel appliances",
+                    "Fireplace"
+                ],
+                school_district="Willow Creek",
+                amenities=[
+                    "Community pool",
+                    "Playground",
+                    "Walking trails"
+                ]
+            )
+        ),
+        Property(
+            id="L4",
+            price=895000,
+            sqft=2200,
+            bedrooms=3,
+            bathrooms=2.5,
+            year_built=1890,
+            location="Historic District",
+            property_type="Townhouse",
+            facts=PropertyFacts(
+                lot_size="0.1 acres",
+                garage="Street parking",
+                features=[
+                    "Original hardwood floors",
+                    "Crown molding",
+                    "Restored facade",
+                    "Updated systems"
+                ],
+                school_district="Heritage District",
+                amenities=[
+                    "Walk to restaurants",
+                    "Public transit",
+                    "Museums nearby"
+                ]
+            )
+        ),
+        Property(
+            id="L5",
+            price=925000,
+            sqft=2800,
+            bedrooms=3,
+            bathrooms=3,
+            year_built=2020,
+            location="Mountain Ridge",
+            property_type="Contemporary Home",
+            facts=PropertyFacts(
+                lot_size="1.5 acres",
+                garage="2-car attached + workshop",
+                features=[
+                    "Panoramic views",
+                    "Solar panels",
+                    "Radiant heating",
+                    "Designer kitchen"
+                ],
+                school_district="Mountain Valley",
+                amenities=[
+                    "Hiking trails",
+                    "Ski resort proximity",
+                    "Wildlife viewing"
+                ]
+            )
+        ),
+        Property(
+            id="L6",
+            price=375000,
+            sqft=1500,
+            bedrooms=3,
+            bathrooms=2,
+            year_built=1985,
+            location="Sunnyside Heights",
+            property_type="Ranch Style",
+            facts=PropertyFacts(
+                lot_size="0.25 acres",
+                garage="1-car attached",
+                features=[
+                    "Updated kitchen",
+                    "New roof (2022)",
+                    "Fenced yard",
+                    "Fresh paint"
+                ],
+                school_district="Sunnyside Elementary",
+                amenities=[
+                    "Park nearby",
+                    "Shopping center",
+                    "Public transportation"
+                ]
+            )
+        ),
+        Property(
+            id="L7",
+            price=450000,
+            sqft=1400,
+            bedrooms=2,
+            bathrooms=2,
+            year_built=1975,
+            location="Lake Shore Drive",
+            property_type="Cottage",
+            facts=PropertyFacts(
+                lot_size="0.2 acres",
+                garage="Detached 1-car",
+                features=[
+                    "Lake views",
+                    "Deck",
+                    "Stone fireplace",
+                    "Updated bathroom"
+                ],
+                school_district="Lakeview",
+                amenities=[
+                    "Private beach access",
+                    "Boat dock",
+                    "Fishing spots"
+                ]
+            )
+        ),
+        Property(
+            id="L8",
+            price=825000,
+            sqft=2400,
+            bedrooms=3,
+            bathrooms=2.5,
+            year_built=2022,
+            location="Green Valley",
+            property_type="Modern Home",
+            facts=PropertyFacts(
+                lot_size="0.4 acres",
+                garage="2-car attached with EV charger",
+                features=[
+                    "LEED certified",
+                    "Solar array",
+                    "Rain collection system",
+                    "Smart home technology"
+                ],
+                school_district="Green Valley",
+                amenities=[
+                    "Bike trails",
+                    "Organic community garden",
+                    "Nature preserve"
+                ]
+            )
+        ),
+        Property(
+            id="L9",
+            price=299000,
+            sqft=550,
+            bedrooms=1,
+            bathrooms=1,
+            year_built=2021,
+            location="Downtown Core",
+            property_type="Micro-Apartment",
+            facts=PropertyFacts(
+                lot_size="N/A",
+                garage="Bike storage",
+                features=[
+                    "Murphy bed",
+                    "Convertible furniture",
+                    "High-end appliances",
+                    "Storage solutions"
+                ],
+                school_district="Metropolitan",
+                amenities=[
+                    "Shared workspace",
+                    "Rooftop garden",
+                    "Public transit hub"
+                ]
+            )
+        ),
+        Property(
+            id="L10",
+            price=750000,
+            sqft=2100,
+            bedrooms=3,
+            bathrooms=2.5,
+            year_built=2005,
+            location="The Links",
+            property_type="Villa",
+            facts=PropertyFacts(
+                lot_size="0.15 acres",
+                garage="2-car attached",
+                features=[
+                    "Golf course views",
+                    "Covered patio",
+                    "Wet bar",
+                    "Custom closets"
+                ],
+                school_district="Links Academy",
+                amenities=[
+                    "Golf club membership available",
+                    "Community pool",
+                    "Tennis courts",
+                    "Club house"
+                ]
+            )
+        )
     ]
 
 

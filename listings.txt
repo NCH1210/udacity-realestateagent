@@ -30,3 +30,123 @@
    * School District: Central District
    * Amenities: Rooftop terrace, 24/7 security, Fitness center, Coffee shop downstairs
 
+3. SINGLE FAMILY HOME - WILLOW CREEK ESTATES
+   * ID: L3
+   * Price: $685,000
+   * Square Feet: 2,600
+   * Bedrooms: 4
+   * Bathrooms: 3
+   * Year Built: 2010
+   * Location: Willow Creek Estates
+   * Property Type: Single Family Home
+   * Lot Size: 0.3 acres
+   * Garage: 2-car attached
+   * Features: Open floor plan, Granite countertops, Stainless steel appliances, Fireplace
+   * School District: Willow Creek
+   * Amenities: Community pool, Playground, Walking trails
+
+4. TOWNHOUSE - HISTORIC DISTRICT
+   * ID: L4
+   * Price: $895,000
+   * Square Feet: 2,200
+   * Bedrooms: 3
+   * Bathrooms: 2.5
+   * Year Built: 1890
+   * Location: Historic District
+   * Property Type: Townhouse
+   * Lot Size: 0.1 acres
+   * Garage: Street parking
+   * Features: Original hardwood floors, Crown molding, Restored facade, Updated systems
+   * School District: Heritage District
+   * Amenities: Walk to restaurants, Public transit, Museums nearby
+
+5. CONTEMPORARY HOME - MOUNTAIN RIDGE
+   * ID: L5
+   * Price: $925,000
+   * Square Feet: 2,800
+   * Bedrooms: 3
+   * Bathrooms: 3
+   * Year Built: 2020
+   * Location: Mountain Ridge
+   * Property Type: Contemporary Home
+   * Lot Size: 1.5 acres
+   * Garage: 2-car attached + workshop
+   * Features: Panoramic views, Solar panels, Radiant heating, Designer kitchen
+   * School District: Mountain Valley
+   * Amenities: Hiking trails, Ski resort proximity, Wildlife viewing
+
+6. RANCH STYLE - SUNNYSIDE HEIGHTS
+   * ID: L6
+   * Price: $375,000
+   * Square Feet: 1,500
+   * Bedrooms: 3
+   * Bathrooms: 2
+   * Year Built: 1985
+   * Location: Sunnyside Heights
+   * Property Type: Ranch Style
+   * Lot Size: 0.25 acres
+   * Garage: 1-car attached
+   * Features: Updated kitchen, New roof (2022), Fenced yard, Fresh paint
+   * School District: Sunnyside Elementary
+   * Amenities: Park nearby, Shopping center, Public transportation
+
+7. COTTAGE - LAKE SHORE DRIVE
+   * ID: L7
+   * Price: $450,000
+   * Square Feet: 1,400
+   * Bedrooms: 2
+   * Bathrooms: 2
+   * Year Built: 1975
+   * Location: Lake Shore Drive
+   * Property Type: Cottage
+   * Lot Size: 0.2 acres
+   * Garage: Detached 1-car
+   * Features: Lake views, Deck, Stone fireplace, Updated bathroom
+   * School District: Lakeview
+   * Amenities: Private beach access, Boat dock, Fishing spots
+
+8. MODERN HOME - GREEN VALLEY
+   * ID: L8
+   * Price: $825,000
+   * Square Feet: 2,400
+   * Bedrooms: 3
+   * Bathrooms: 2.5
+   * Year Built: 2022
+   * Location: Green Valley
+   * Property Type: Modern Home
+   * Lot Size: 0.4 acres
+   * Garage: 2-car attached with EV charger
+   * Features: LEED certified, Solar array, Rain collection system, Smart home technology
+   * School District: Green Valley
+   * Amenities: Bike trails, Organic community garden, Nature preserve
+
+9. MICRO-APARTMENT - DOWNTOWN CORE
+   * ID: L9
+   * Price: $299,000
+   * Square Feet: 550
+   * Bedrooms: 1
+   * Bathrooms: 1
+   * Year Built: 2021
+   * Location: Downtown Core
+   * Property Type: Micro-Apartment
+   * Lot Size: N/A
+   * Garage: Bike storage
+   * Features: Murphy bed, Convertible furniture, High-end appliances, Storage solutions
+   * School District: Metropolitan
+   * Amenities: Shared workspace, Rooftop garden, Public transit hub
+
+10. VILLA - THE LINKS
+   * ID: L10
+   * Price: $750,000
+   * Square Feet: 2,100
+   * Bedrooms: 3
+   * Bathrooms: 2.5
+   * Year Built: 2005
+   * Location: The Links
+   * Property Type: Villa
+   * Lot Size: 0.15 acres
+   * Garage: 2-car attached
+   * Features: Golf course views, Covered patio, Wet bar, Custom closets
+   * School District: Links Academy
+   * Amenities: Golf club membership available, Community pool, Tennis courts, Club house
+
