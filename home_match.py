@@ -1,5 +1,5 @@
 """
-Real estate listing generator that uses LLM to create and personalize listings based on 
+Real estate listing generator that uses LLM to create and personalize listings based on
 buyer preferences.
 """
 
@@ -17,7 +17,7 @@ class ListingGenerator:
         """Initialize with Vocareum OpenAI client."""
         self.client = OpenAI(
             base_url="https://openai.vocareum.com/v1",
-            api_key="voc-00000000000000000000000000000000abcd.12345678"
+            api_key="voc-73934113126677372266267671b469979c3.45097448"
         )
 
         self.base_prompt = (
@@ -27,7 +27,7 @@ class ListingGenerator:
             "- bedrooms (1-6)\n"
             "- bathrooms (1-4)\n"
             "- houseSize (in sqft, between 800 and 5000)\n"
-            "- description (detailed property description)\n"
+            "- **description** (detailed property description)\n"
             "- neighborhoodDescription (detailed area description)\n"
             "- features (list of key property features)\n"
             "- yearBuilt (between 1900 and 2024)\n"
@@ -38,7 +38,7 @@ class ListingGenerator:
             "- schoolDistrict\n\n"
             "Create a unique listing with specific details and character.\n"
             "Ensure all numeric values are realistic and consistent.\n"
-            "The description should paint a vivid picture of the property."
+            "**The description should paint a vivid picture of the property, highlighting its unique aspects and appeal.**"
         )
 
     def generate_listing(self, style_prompt: str = "") -> Dict:
@@ -244,7 +244,7 @@ class ListingGenerator:
                     f.write("-" * 80 + "\n\n")
 
             print(f"Successfully saved {
-                  len(results)} matched listings to {filename}")
+                len(results)} matched listings to {filename}")
 
         except IOError as e:
             print(f"Error saving to file: {e}")
